@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FBFEEAB0-E953-4D30-90BF-83E04A9513DE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Data_Core</RootNamespace>
+    <AssemblyName>Data Core</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\..\..\Program Files (x86-64)\Unity 2018.3.5f1\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\Program Files (x86-64)\Unity 2018.3.5f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\Program Files (x86-64)\Unity 2018.3.5f1\Editor\Data\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Components\EventListener.cs" />
+    <Compile Include="src\Components\FloatToTimeString.cs" />
+    <Compile Include="src\Components\Logger.cs" />
+    <Compile Include="src\Components\TimeAccumulator.cs" />
+    <Compile Include="src\Data\Enums\LogLevel.cs" />
+    <Compile Include="src\Data\Enums\PermissionLevel.cs" />
+    <Compile Include="src\Data\Reference\Base\VariableReference.cs" />
+    <Compile Include="src\Data\Reference\Base\VariableReferenceBase.cs" />
+    <Compile Include="src\Data\Reference\Base\VariableReferenceMode.cs" />
+    <Compile Include="src\Data\Reference\Editor\VariableReferenceEditor.cs" />
+    <Compile Include="src\Data\Types\Buffer.cs" />
+    <Compile Include="src\Data\Types\FloatBuffer.cs" />
+    <Compile Include="src\Data\Variable\Base\Variable.cs" />
+    <Compile Include="src\Data\Variable\BoolVariable.cs" />
+    <Compile Include="src\Data\Variable\EventRegistryVariable.cs" />
+    <Compile Include="src\Data\Variable\EventVariable.cs" />
+    <Compile Include="src\Data\Variable\FloatBufferVariable.cs" />
+    <Compile Include="src\Data\Variable\FloatVariable.cs" />
+    <Compile Include="src\Data\Variable\LogLevelVariable.cs" />
+    <Compile Include="src\Data\Variable\StringVariable.cs" />
+    <Compile Include="src\Debug\Logger.cs" />
+    <Compile Include="src\Debug\Reflection\Utilities.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
