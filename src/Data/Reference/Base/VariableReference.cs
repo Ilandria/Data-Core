@@ -26,7 +26,7 @@ namespace CCB
 
 					public VariableReference(Object owner, VariableReferenceMode defaultMode) : base(owner, defaultMode)
 					{
-
+						value = default;
 					}
 
 					/// <summary>

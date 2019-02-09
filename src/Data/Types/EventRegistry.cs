@@ -1,7 +1,6 @@
 ﻿using CCB.DataCore.Component;
 using CCB.DataCore.Debugging;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace CCB
 {
@@ -9,16 +8,16 @@ namespace CCB
 	{
 		namespace Data
 		{
-			public class EventRegistry
+			[System.Serializable]
+			public struct EventRegistry
 			{
-				[SerializeField]
-				private List<EventListener> registeredListeners = new List<EventListener>();
+				private List<EventListener> registeredListeners;
 
 				public EventListener[] RegisteredListeners
 				{
 					get
 					{
-						return registeredListeners.ToArray();
+						return registeredListeners?.ToArray();
 					}
 				}
 
@@ -26,6 +25,11 @@ namespace CCB
 				{
 					if (eventListener != null)
 					{
+						if (registeredListeners == null)
+						{
+							registeredListeners = new List<EventListener>();
+						}
+
 						if (!registeredListeners.Contains(eventListener))
 						{
 							registeredListeners.Add(eventListener);
@@ -43,20 +47,26 @@ namespace CCB
 
 				public void Unregister(EventListener eventListener)
 				{
-					registeredListeners.Remove(eventListener);
+					if (registeredListeners != null)
+					{
+						registeredListeners.Remove(eventListener);
+					}
 				}
 
 				public void Raise()
 				{
-					foreach (EventListener eventListener in registeredListeners)
+					if (registeredListeners != null)
 					{
-						eventListener.Raise();
+						foreach (EventListener eventListener in registeredListeners)
+						{
+							eventListener.Raise();
+						}
 					}
 				}
 
 				public void Clear()
 				{
-					registeredListeners.Clear();
+					registeredListeners?.Clear();
 				}
 			}
 		}

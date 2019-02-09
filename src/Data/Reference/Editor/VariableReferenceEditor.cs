@@ -36,7 +36,7 @@ namespace CCB
 
 						EditorGUI.BeginProperty(position, label, property);
 
-						EditorGUI.LabelField(new Rect(position.x, position.y, 100, position.height), property.displayName);
+						EditorGUI.LabelField(new Rect(position.x, position.y, 150, position.height), property.displayName);
 						EditorGUI.PropertyField(new Rect(position.x + position.width - position.width * 0.55f - 30, position.y, 70, position.height), property.FindPropertyRelative("mode"), GUIContent.none);
 
 						float start = position.x + position.width - position.width * 0.55f + 45;

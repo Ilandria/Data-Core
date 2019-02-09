@@ -1,7 +1,4 @@
-﻿using CCB.DataCore.Component;
-using CCB.DataCore.Data.Variable;
-using CCB.DataCore.Debugging;
-using System.Collections.Generic;
+﻿using CCB.DataCore.Data.Variable;
 using UnityEngine;
 
 namespace CCB
@@ -18,12 +15,12 @@ namespace CCB
 				{
 					public void Raise()
 					{
-						Value?.Raise();
+						Value.Raise();
 					}
 
 					protected override void SetToDefault()
 					{
-						value.Clear();
+						Value.Clear();
 					}
 				}
 			}

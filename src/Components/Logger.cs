@@ -43,7 +43,7 @@ namespace CCB
 
 				private string GetFormattedMessage()
 				{
-					return $"Object Name: {name} | {logMessage.Value}";
+					return $"{name} | {logMessage.Value}";
 				}
 			}
 		}

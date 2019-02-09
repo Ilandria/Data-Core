@@ -46,10 +46,10 @@ namespace CCB
 						currentInputValue.Value = currentAxis;
 
 						// If it was not being activated...
-						if (Mathf.Approximately(currentAxis, 0.0f))
+						if (Mathf.Approximately(previousAxis, 0.0f))
 						{
 							// ...and now it is, raise the "on" event.
-							if (!Mathf.Approximately(previousAxis, 0.0f))
+							if (!Mathf.Approximately(currentAxis, 0.0f))
 							{
 								onEvent.Value.Raise();
 							}
@@ -58,7 +58,7 @@ namespace CCB
 						else
 						{
 							// ...and now it isn't, raise the "off" event.
-							if (Mathf.Approximately(previousAxis, 0.0f))
+							if (Mathf.Approximately(currentAxis, 0.0f))
 							{
 								offEvent.Value.Raise();
 							}

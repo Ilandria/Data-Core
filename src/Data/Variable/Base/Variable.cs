@@ -101,13 +101,11 @@ namespace CCB
 
 					protected void OnEnable()
 					{
-						onValueChanged = new EventVariableReference(this, VariableReferenceMode.Value);
 						AutoReset();
 					}
 
 					protected void OnDisable()
 					{
-						onValueChanged = new EventVariableReference(this, VariableReferenceMode.Value);
 						AutoReset();
 					}
 
