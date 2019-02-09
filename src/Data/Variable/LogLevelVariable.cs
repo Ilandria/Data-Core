@@ -23,7 +23,7 @@ namespace CCB
 				[System.Serializable]
 				public class LogLevelVariableReference : VariableReference<LogLevelVariable, LogLevel>
 				{
-					public LogLevelVariableReference(Object owner) : base(owner)
+					public LogLevelVariableReference(Object owner, VariableReferenceMode defaultMode = VariableReferenceMode.Value) : base(owner, defaultMode)
 					{
 
 					}

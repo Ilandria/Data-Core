@@ -24,7 +24,7 @@ namespace CCB
 					[SerializeField]
 					protected ValueType value;
 
-					public VariableReference(Object owner) : base(owner)
+					public VariableReference(Object owner, VariableReferenceMode defaultMode) : base(owner, defaultMode)
 					{
 
 					}

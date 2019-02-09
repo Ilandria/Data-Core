@@ -32,7 +32,7 @@ namespace CCB
 					{
 						foreach (EventRegistryVariable eventRegistry in autoRegister)
 						{
-							eventRegistry.Register(this);
+							eventRegistry.Value.Register(this);
 						}
 					}
 				}
@@ -43,7 +43,7 @@ namespace CCB
 					{
 						foreach (EventRegistryVariable eventRegistry in autoRegister)
 						{
-							eventRegistry.Unregister(this);
+							eventRegistry.Value.Unregister(this);
 						}
 					}
 				}

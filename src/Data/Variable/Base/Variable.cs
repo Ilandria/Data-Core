@@ -1,4 +1,5 @@
 ﻿using CCB.DataCore.Data.Enum;
+using CCB.DataCore.Data.Reference;
 using CCB.DataCore.Debugging;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ namespace CCB
 					/// Optional event registry to raise whenever the value has changed.
 					/// </summary>
 					[SerializeField]
-					protected EventRegistryVariable valueChangedEvent = null;
+					protected EventVariableReference onValueChanged = null;
 
 					/// <summary>
 					/// If it is currently safe to write to this variable.
@@ -80,7 +81,7 @@ namespace CCB
 							if (accessMode == PermissionLevel.ReadWrite)
 							{
 								this.value = value;
-								valueChangedEvent?.Raise();
+								onValueChanged.Value?.Invoke();
 							}
 							else
 							{
@@ -100,11 +101,13 @@ namespace CCB
 
 					protected void OnEnable()
 					{
+						onValueChanged = new EventVariableReference(this, VariableReferenceMode.Value);
 						AutoReset();
 					}
 
 					protected void OnDisable()
 					{
+						onValueChanged = new EventVariableReference(this, VariableReferenceMode.Value);
 						AutoReset();
 					}
 

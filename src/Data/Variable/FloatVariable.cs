@@ -22,7 +22,7 @@ namespace CCB
 				[System.Serializable]
 				public class FloatVariableReference : VariableReference<FloatVariable, float>
 				{
-					public FloatVariableReference(Object owner) : base(owner)
+					public FloatVariableReference(Object owner, VariableReferenceMode defaultMode = VariableReferenceMode.Reference) : base(owner, defaultMode)
 					{
 
 					}

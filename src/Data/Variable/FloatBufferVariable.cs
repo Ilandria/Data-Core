@@ -28,7 +28,7 @@ namespace CCB
 				[System.Serializable]
 				public class FloatBufferVariableReference : VariableReference<FloatBufferVariable, FloatBuffer>
 				{
-					public FloatBufferVariableReference(Object owner) : base(owner)
+					public FloatBufferVariableReference(Object owner, VariableReferenceMode defaultMode = VariableReferenceMode.Reference) : base(owner, defaultMode)
 					{
 
 					}

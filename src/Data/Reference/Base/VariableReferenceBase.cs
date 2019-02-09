@@ -58,7 +58,7 @@ namespace CCB
 
 					}
 
-					public VariableReferenceBase(UnityEngine.Object owner)
+					public VariableReferenceBase(UnityEngine.Object owner, VariableReferenceMode defaultMode)
 					{
 						if (owner == null)
 						{
@@ -68,6 +68,8 @@ namespace CCB
 						{
 							this.owner = owner;
 						}
+
+						mode = defaultMode;
 					}
 
 					/// <summary>
