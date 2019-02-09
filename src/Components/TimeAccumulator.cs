@@ -19,9 +19,6 @@ namespace CCB
 				[SerializeField]
 				private FloatVariableReference output;
 
-				[SerializeField]
-				private VariableReference<FloatVariable, float> testing;
-
 				public TimeAccumulator()
 				{
 					isRunning = new BoolVariableReference(this);

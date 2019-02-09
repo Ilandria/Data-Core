@@ -74,4 +74,7 @@
     <Compile Include="src\Debug\Reflection\Utilities.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(SolutionDir)$(OutDir)$(TargetFileName)" "$(SolutionDir)latest\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
