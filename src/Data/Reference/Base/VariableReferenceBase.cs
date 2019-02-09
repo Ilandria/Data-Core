@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CCB.DataCore.Debugging;
+using System;
 using UnityEngine;
 
 namespace CCB
@@ -41,11 +42,11 @@ namespace CCB
 					{
 						get
 						{
-							string fieldName = Debug.Reflection.Utilities.GetFieldName(this, owner);
+							string fieldName = Debugging.Reflection.Utilities.GetFieldName(this, owner);
 
 							if (string.IsNullOrWhiteSpace(fieldName))
 							{
-								Debug.Logger.Warning($"The field for {GetType()} could not be found in \"{owner.name}\" ({owner.GetType()}). This is could make debugging a pain!");
+								ConsoleUtils.Warning($"The field for {GetType()} could not be found in \"{owner.name}\" ({owner.GetType()}). This is could make debugging a pain!");
 							}
 
 							return fieldName;
@@ -61,7 +62,7 @@ namespace CCB
 					{
 						if (owner == null)
 						{
-							Debug.Logger.Error($"{GetType()} was not assigned an owner. This is could make debugging a pain!");
+							ConsoleUtils.Error($"{GetType()} was not assigned an owner. This is could make debugging a pain!");
 						}
 						else
 						{
@@ -78,7 +79,7 @@ namespace CCB
 						string ownerType = owner.GetType().ToString();
 						int lastDelimIndex = ownerType.LastIndexOf('.');
 
-						Debug.Logger.Warning($"{owner.name}'s {ownerType.Substring(lastDelimIndex + 1)}.{OwnerFieldName} is set to reference mode and reference is null!");
+						ConsoleUtils.Warning($"{owner.name}'s {ownerType.Substring(lastDelimIndex + 1)}.{OwnerFieldName} is set to reference mode and reference is null!");
 					}
 				}
 			}

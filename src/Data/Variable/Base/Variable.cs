@@ -1,4 +1,5 @@
 ﻿using CCB.DataCore.Data.Enum;
+using CCB.DataCore.Debugging;
 using UnityEngine;
 
 namespace CCB
@@ -68,7 +69,7 @@ namespace CCB
 						{
 							if (value == null)
 							{
-								Debug.Logger.Warning($"Variable {name} value is currently null.");
+								ConsoleUtils.Warning($"Variable {name} value is currently null.");
 							}
 
 							return value;
@@ -83,7 +84,7 @@ namespace CCB
 							}
 							else
 							{
-								Debug.Logger.Warning($"Tried to set {name}'s value while it was in read-only mode.");
+								ConsoleUtils.Warning($"Tried to set {name}'s value while it was in read-only mode.");
 							}
 						}
 					}

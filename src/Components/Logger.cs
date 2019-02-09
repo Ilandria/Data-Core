@@ -1,5 +1,6 @@
 ﻿using CCB.DataCore.Data.Enum;
 using CCB.DataCore.Data.Reference;
+using CCB.DataCore.Debugging;
 using UnityEngine;
 
 namespace CCB
@@ -27,15 +28,15 @@ namespace CCB
 					switch (logLevel.Value)
 					{
 						case LogLevel.Message:
-							Debug.Logger.Message(GetFormattedMessage());
+							ConsoleUtils.Message(GetFormattedMessage());
 							break;
 
 						case LogLevel.Warning:
-							Debug.Logger.Warning(GetFormattedMessage());
+							ConsoleUtils.Warning(GetFormattedMessage());
 							break;
 
 						case LogLevel.Error:
-							Debug.Logger.Error(GetFormattedMessage());
+							ConsoleUtils.Error(GetFormattedMessage());
 							break;
 					}
 				}

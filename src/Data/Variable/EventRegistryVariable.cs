@@ -1,5 +1,6 @@
 ﻿using CCB.DataCore.Component;
 using CCB.DataCore.Data.Variable;
+using CCB.DataCore.Debugging;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,12 +26,12 @@ namespace CCB
 							}
 							else
 							{
-								Debug.Logger.Warning($"{name} tried to register a duplicate event listener: {eventListener.name}.");
+								ConsoleUtils.Warning($"{name} tried to register a duplicate event listener: {eventListener.name}.");
 							}
 						}
 						else
 						{
-							Debug.Logger.Warning($"{name} tried to register a null event listener.");
+							ConsoleUtils.Warning($"{name} tried to register a null event listener.");
 						}
 					}
 
