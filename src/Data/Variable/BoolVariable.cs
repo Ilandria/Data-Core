@@ -13,7 +13,10 @@ namespace CCB
 				[CreateAssetMenu(menuName = "CCB/Variable/Bool")]
 				public class BoolVariable : Variable<bool>
 				{
-
+					public void InvertValue()
+					{
+						Value = !Value;
+					}
 				}
 			}
 
@@ -25,6 +28,11 @@ namespace CCB
 					public BoolVariableReference(Object owner, VariableReferenceMode defaultMode = VariableReferenceMode.Reference) : base(owner, defaultMode)
 					{
 
+					}
+
+					public void InvertValue()
+					{
+						Value = !Value;
 					}
 				}
 			}

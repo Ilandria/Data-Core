@@ -11,10 +11,10 @@ namespace CCB
 			public class EventListener : MonoBehaviour
 			{
 				[SerializeField]
-				private EventVariableReference response;
+				private EventRegistryVariable[] autoRegister = null;
 
 				[SerializeField]
-				private EventRegistryVariable[] autoRegister = null;
+				private EventVariableReference response;
 
 				public EventListener()
 				{

@@ -91,6 +91,22 @@ namespace CCB
 					}
 
 					/// <summary>
+					/// Call to reset the value to the default value. If the value is changed, the onChanged event is raised.
+					/// </summary>
+					public void Reset()
+					{
+						if (value != null)
+						{
+							if (!value.Equals(defaultValue))
+							{
+								onValueChanged.Value?.Invoke();
+							}
+						}
+
+						SetToDefault();
+					}
+
+					/// <summary>
 					/// Internally called by ResetIfChanged. Override to define custom reset behaviour to support
 					/// things like deep copying data, or alter other properties.
 					/// </summary>
@@ -115,17 +131,11 @@ namespace CCB
 						if (autoResetInEditor)
 						{
 							SetToDefault();
-
-							// TODO: Should this be called on startup and shutdown?
-							//valueChangedEvent?.Raise();
 						}
 #else
 						if (autoResetInBuild)
 						{
 							SetToDefault();
-
-							// TODO: Should this be called on startup and shutdown?
-							//valueChangedEvent?.Raise();
 						}
 #endif
 					}
