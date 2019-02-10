@@ -11,7 +11,7 @@ namespace CCB
 			namespace Reference
 			{
 				[Serializable]
-				public class VariableReferenceBase
+				public abstract class VariableReferenceBase
 				{
 					/// <summary>
 					/// If this VariableReference is currently referring to a Variable object or storing local data.
@@ -73,6 +73,11 @@ namespace CCB
 					}
 
 					/// <summary>
+					/// Get the currently stored value as the given type.
+					/// </summary>
+					public abstract T GetValueAs<T>();
+
+					/// <summary>
 					/// Prints a reference is null message to the console log containing the object's
 					/// identity for traceability.
 					/// </summary>
@@ -82,6 +87,17 @@ namespace CCB
 						int lastDelimIndex = ownerType.LastIndexOf('.');
 
 						ConsoleUtils.Warning($"{owner.name}'s {ownerType.Substring(lastDelimIndex + 1)}.{OwnerFieldName} is set to reference mode and reference is null!");
+					}
+
+					protected void LogInvalidConversion(Type target)
+					{
+						string ownerType = owner.GetType().ToString();
+						int ownerDelimIndex = ownerType.LastIndexOf('.');
+
+						string targetType = target.ToString();
+						int targetDelimIndex = targetType.LastIndexOf('.');
+
+						ConsoleUtils.Error($"{owner.name}'s {ownerType.Substring(ownerDelimIndex + 1)}.{OwnerFieldName} can not be converted to {targetType.Substring(targetDelimIndex + 1)}");
 					}
 				}
 			}

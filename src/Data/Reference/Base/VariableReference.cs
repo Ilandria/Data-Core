@@ -87,6 +87,22 @@ namespace CCB
 							}
 						}
 					}
+
+					public override T GetValueAs<T>()
+					{
+						T value = default;
+
+						try
+						{
+							value = (T)System.Convert.ChangeType(Value, typeof(T), System.Globalization.CultureInfo.InvariantCulture);
+						}
+						catch (System.InvalidCastException)
+						{
+							LogInvalidConversion(typeof(T));
+						}
+
+						return value;
+					}
 				}
 			}
 		}
