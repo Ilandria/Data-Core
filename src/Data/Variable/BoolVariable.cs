@@ -25,7 +25,7 @@ namespace CCB
 				[System.Serializable]
 				public class BoolVariableReference : VariableReference<BoolVariable, bool>
 				{
-					public BoolVariableReference(Object owner, VariableReferenceMode defaultMode = VariableReferenceMode.Reference) : base(owner, defaultMode)
+					public BoolVariableReference(Object owner) : base(owner)
 					{
 
 					}

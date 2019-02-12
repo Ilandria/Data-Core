@@ -22,7 +22,7 @@ namespace CCB
 				[System.Serializable]
 				public class StringVariableReference : VariableReference<StringVariable, string>
 				{
-					public StringVariableReference(Object owner, VariableReferenceMode defaultMode = VariableReferenceMode.Reference) : base(owner, defaultMode)
+					public StringVariableReference(Object owner) : base(owner)
 					{
 
 					}

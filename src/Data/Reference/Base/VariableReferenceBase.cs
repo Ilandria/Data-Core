@@ -17,7 +17,7 @@ namespace CCB
 					/// If this VariableReference is currently referring to a Variable object or storing local data.
 					/// </summary>
 					[SerializeField]
-					protected VariableReferenceMode mode = VariableReferenceMode.Reference;
+					protected VariableReferenceMode mode = VariableReferenceMode.Value;
 
 					/// <summary>
 					/// The UnityEngine.Object that owns this reference.
@@ -44,10 +44,10 @@ namespace CCB
 						{
 							string fieldName = Debugging.Reflection.Utilities.GetFieldName(this, owner);
 
-							if (string.IsNullOrWhiteSpace(fieldName))
+							/*if (string.IsNullOrWhiteSpace(fieldName))
 							{
 								ConsoleUtils.Warning($"The field for {GetType()} could not be found in \"{owner.name}\" ({owner.GetType()}). This is could make debugging a pain!");
-							}
+							}*/
 
 							return fieldName;
 						}
@@ -58,7 +58,7 @@ namespace CCB
 
 					}
 
-					public VariableReferenceBase(UnityEngine.Object owner, VariableReferenceMode defaultMode)
+					public VariableReferenceBase(UnityEngine.Object owner)
 					{
 						if (owner == null)
 						{
@@ -68,37 +68,12 @@ namespace CCB
 						{
 							this.owner = owner;
 						}
-
-						mode = defaultMode;
 					}
 
 					/// <summary>
 					/// Get the currently stored value as the given type.
 					/// </summary>
 					public abstract T GetValueAs<T>();
-
-					/// <summary>
-					/// Prints a reference is null message to the console log containing the object's
-					/// identity for traceability.
-					/// </summary>
-					protected void LogNullReference()
-					{
-						string ownerType = owner.GetType().ToString();
-						int lastDelimIndex = ownerType.LastIndexOf('.');
-
-						ConsoleUtils.Warning($"{owner.name}'s {ownerType.Substring(lastDelimIndex + 1)}.{OwnerFieldName} is set to reference mode and reference is null!");
-					}
-
-					protected void LogInvalidConversion(Type target)
-					{
-						string ownerType = owner.GetType().ToString();
-						int ownerDelimIndex = ownerType.LastIndexOf('.');
-
-						string targetType = target.ToString();
-						int targetDelimIndex = targetType.LastIndexOf('.');
-
-						ConsoleUtils.Error($"{owner.name}'s {ownerType.Substring(ownerDelimIndex + 1)}.{OwnerFieldName} can not be converted to {targetType.Substring(targetDelimIndex + 1)}");
-					}
 				}
 			}
 		}

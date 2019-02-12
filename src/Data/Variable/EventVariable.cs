@@ -26,9 +26,14 @@ namespace CCB
 				[System.Serializable]
 				public class EventVariableReference : VariableReference<EventVariable, UnityEvent>
 				{
-					public EventVariableReference(Object owner, VariableReferenceMode defaultMode = VariableReferenceMode.Value) : base(owner, defaultMode)
+					public EventVariableReference(Object owner) : base(owner)
 					{
 
+					}
+
+					public void Raise()
+					{
+						Value?.Invoke();
 					}
 				}
 			}

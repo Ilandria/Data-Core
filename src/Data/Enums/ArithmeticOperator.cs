@@ -6,7 +6,7 @@
 		{
 			namespace Enum
 			{
-				public enum ArithmeticOperators
+				public enum ArithmeticOperator
 				{
 					Add,
 					Subtract,

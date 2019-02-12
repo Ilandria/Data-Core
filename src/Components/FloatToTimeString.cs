@@ -24,7 +24,7 @@ namespace CCB
 
 				private void Update()
 				{
-					TimeSpan timeSpan = TimeSpan.FromSeconds(input.Value);
+					TimeSpan timeSpan = TimeSpan.FromSeconds(Mathf.Round(input.Value));
 
 					if (timeSpan.Hours > 0)
 					{

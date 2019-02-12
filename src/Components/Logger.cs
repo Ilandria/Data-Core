@@ -9,6 +9,7 @@ namespace CCB
 	{
 		namespace Component
 		{
+			[ExecuteAlways]
 			public class Logger : MonoBehaviour
 			{
 				[SerializeField]

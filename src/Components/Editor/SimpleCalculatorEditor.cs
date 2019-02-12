@@ -3,6 +3,7 @@
 using CCB.DataCore.Component;
 using CCB.DataCore.Data.Enum;
 using CCB.DataCore.Data.Reference;
+using CCB.DataCore.Data.Variable;
 using Supyrb;
 using System.Collections.Generic;
 using UnityEditor;
@@ -19,24 +20,26 @@ namespace CCB
 				[CustomEditor(typeof(SimpleCalculator))]
 				public class SimpleCalculatorEditor : UnityEditor.Editor
 				{
-					SerializedProperty numElementsProperty;
+					SerializedProperty numInputsProperty;
 					SerializedProperty operatorsProperty;
-					SerializedProperty elementsProperty;
+					SerializedProperty inputsProperty;
+					SerializedProperty resultProperty;
 
 					public void OnEnable()
 					{
-						numElementsProperty = serializedObject.FindProperty("numElements");
+						numInputsProperty = serializedObject.FindProperty("numberOfInputs");
 						operatorsProperty = serializedObject.FindProperty("operators");
-						elementsProperty = serializedObject.FindProperty("elements");
+						inputsProperty = serializedObject.FindProperty("inputs");
+						resultProperty = serializedObject.FindProperty("result");
 					}
 
 					public override void OnInspectorGUI()
 					{
-						IntVariableReference numElementsReference = numElementsProperty.GetValue<IntVariableReference>();
+						IntVariableReference numElementsReference = numInputsProperty.GetValue<IntVariableReference>();
 
 						// Show the number of elements and see if it was changed.
 						EditorGUI.BeginChangeCheck();
-						EditorGUILayout.PropertyField(numElementsProperty);
+						EditorGUILayout.PropertyField(numInputsProperty);
 						bool numElementsWasChanged = EditorGUI.EndChangeCheck();
 
 						// Apply the changes.
@@ -52,16 +55,19 @@ namespace CCB
 						// Show each of the elements of the arrays for editing.
 						for (int i = 0; i < numElements; i++)
 						{
-							if (i < operatorsProperty.arraySize && i < elementsProperty.arraySize)
+							if (i < operatorsProperty.arraySize && i < inputsProperty.arraySize)
 							{
 								EditorGUILayout.BeginHorizontal();
 
 								EditorGUILayout.PropertyField(operatorsProperty.GetArrayElementAtIndex(i));
-								EditorGUILayout.PropertyField(elementsProperty.GetArrayElementAtIndex(i));
+								EditorGUILayout.PropertyField(inputsProperty.GetArrayElementAtIndex(i), GUIContent.none);
 
 								EditorGUILayout.EndHorizontal();
 							}
 						}
+
+						// Show the result output field.
+						EditorGUILayout.PropertyField(resultProperty);
 
 						// Apply the final changes with an undo available.
 						serializedObject.ApplyModifiedProperties();
@@ -70,10 +76,10 @@ namespace CCB
 					private void RecreateArrays(int numElements)
 					{
 						// Update the operators list.
-						List<ArithmeticOperators> newOperators = new List<ArithmeticOperators>();
-						ArithmeticOperators[] oldOperators = operatorsProperty.GetValue<ArithmeticOperators[]>();
+						List<ArithmeticOperator> newOperators = new List<ArithmeticOperator>();
+						ArithmeticOperator[] oldOperators = operatorsProperty.GetValue<ArithmeticOperator[]>();
 
-						foreach (ArithmeticOperators op in oldOperators)
+						foreach (ArithmeticOperator op in oldOperators)
 						{
 							if (newOperators.Count < oldOperators.Length)
 							{
@@ -83,16 +89,16 @@ namespace CCB
 
 						for (int i = newOperators.Count; i < numElements; i++)
 						{
-							newOperators.Add(ArithmeticOperators.Add);
+							newOperators.Add(ArithmeticOperator.Add);
 						}
 
 						operatorsProperty.SetValue(newOperators.ToArray());
 
 						// Update the elements list.
-						List<VariableReferenceBase> newElements = new List<VariableReferenceBase>();
-						VariableReferenceBase[] oldElements = elementsProperty.GetValue<VariableReferenceBase[]>();
+						List<VariableBase> newElements = new List<VariableBase>();
+						VariableBase[] oldElements = inputsProperty.GetValue<VariableBase[]>();
 
-						foreach (VariableReferenceBase element in oldElements)
+						foreach (VariableBase element in oldElements)
 						{
 							if (newElements.Count < oldElements.Length)
 							{
@@ -102,10 +108,10 @@ namespace CCB
 
 						for (int i = newElements.Count; i < numElements; i++)
 						{
-							newElements.Add(CreateInstance<FloatVariableReference>());
+							newElements.Add(null);
 						}
 
-						elementsProperty.SetValue(newElements.ToArray());
+						inputsProperty.SetValue(newElements.ToArray());
 
 						// Apply the changes - no undo since we're partway through an update.
 						serializedObject.ApplyModifiedPropertiesWithoutUndo();

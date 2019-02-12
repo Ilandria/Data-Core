@@ -24,7 +24,7 @@ namespace CCB
 					[SerializeField]
 					protected ValueType value;
 
-					public VariableReference(Object owner, VariableReferenceMode defaultMode) : base(owner, defaultMode)
+					public VariableReference(Object owner) : base(owner)
 					{
 						value = default;
 					}
@@ -57,7 +57,7 @@ namespace CCB
 								}
 								else
 								{
-									LogNullReference();
+									Debugging.ConsoleUtils.UnassignedReferenceWarning(owner, OwnerFieldName);
 								}
 							}
 							else
@@ -78,7 +78,7 @@ namespace CCB
 								}
 								else
 								{
-									LogNullReference();
+									Debugging.ConsoleUtils.UnassignedReferenceWarning(owner, OwnerFieldName);
 								}
 							}
 							else
@@ -90,18 +90,9 @@ namespace CCB
 
 					public override T GetValueAs<T>()
 					{
-						T value = default;
+						T result = Utilities.Conversions.ConvertType<T>(Value, owner, OwnerFieldName);
 
-						try
-						{
-							value = (T)System.Convert.ChangeType(Value, typeof(T), System.Globalization.CultureInfo.InvariantCulture);
-						}
-						catch (System.InvalidCastException)
-						{
-							LogInvalidConversion(typeof(T));
-						}
-
-						return value;
+						return result;
 					}
 				}
 			}

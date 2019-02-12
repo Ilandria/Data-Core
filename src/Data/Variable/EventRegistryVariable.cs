@@ -30,7 +30,7 @@ namespace CCB
 				[System.Serializable]
 				public class EventRegistryVariableReference : VariableReference<EventRegistryVariable, EventRegistry>
 				{
-					public EventRegistryVariableReference(Object owner, VariableReferenceMode defaultMode = VariableReferenceMode.Reference) : base(owner, defaultMode)
+					public EventRegistryVariableReference(Object owner) : base(owner)
 					{
 
 					}

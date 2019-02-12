@@ -7,7 +7,7 @@ namespace CCB
 	{
 		namespace Component
 		{
-			public class InputListener : MonoBehaviour
+			public class InputAxisReader : MonoBehaviour
 			{
 				[SerializeField]
 				private StringVariableReference inputName;
@@ -27,10 +27,10 @@ namespace CCB
 				[SerializeField]
 				private FloatVariableReference currentInputValue;
 
-				public InputListener()
+				public InputAxisReader()
 				{
 					inputName = new StringVariableReference(this);
-					inputEnabled = new BoolVariableReference(this, VariableReferenceMode.Value);
+					inputEnabled = new BoolVariableReference(this);
 					onEvent = new EventRegistryVariableReference(this);
 					offEvent = new EventRegistryVariableReference(this);
 					holdEvent = new EventRegistryVariableReference(this);
