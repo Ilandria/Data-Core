@@ -68,6 +68,11 @@ namespace CCB
 
 					return oldestElement;
 				}
+
+				public override string ToString()
+				{
+					return $"(Max: {maxBufferSize}, Current: {buffer.Count})";
+				}
 			}
 		}
 	}

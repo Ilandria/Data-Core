@@ -9,15 +9,20 @@ namespace CCB
 		namespace Data
 		{
 			[System.Serializable]
-			public struct EventRegistry
+			public class EventRegistry
 			{
 				private List<EventListener> registeredListeners;
+
+				public EventRegistry()
+				{
+					registeredListeners = new List<EventListener>();
+				}
 
 				public EventListener[] RegisteredListeners
 				{
 					get
 					{
-						return registeredListeners?.ToArray();
+						return registeredListeners.ToArray();
 					}
 				}
 
@@ -25,48 +30,37 @@ namespace CCB
 				{
 					if (eventListener != null)
 					{
-						if (registeredListeners == null)
-						{
-							registeredListeners = new List<EventListener>();
-						}
-
 						if (!registeredListeners.Contains(eventListener))
 						{
 							registeredListeners.Add(eventListener);
 						}
 						else
 						{
-							ConsoleUtils.Warning($"{ToString()} tried to register a duplicate event listener: {eventListener.name}.");
+							ConsoleUtils.Wrn($"{ToString()} tried to register a duplicate event listener: {eventListener.name}.");
 						}
 					}
 					else
 					{
-						ConsoleUtils.Warning($"{ToString()} tried to register a null event listener.");
+						ConsoleUtils.Wrn($"{ToString()} tried to register a null event listener.");
 					}
 				}
 
 				public void Unregister(EventListener eventListener)
 				{
-					if (registeredListeners != null)
-					{
-						registeredListeners.Remove(eventListener);
-					}
+					registeredListeners.Remove(eventListener);
 				}
 
 				public void Raise()
 				{
-					if (registeredListeners != null)
+					foreach (EventListener eventListener in registeredListeners)
 					{
-						foreach (EventListener eventListener in registeredListeners)
-						{
-							eventListener.Raise();
-						}
+						eventListener.Raise();
 					}
 				}
 
 				public void Clear()
 				{
-					registeredListeners?.Clear();
+					registeredListeners.Clear();
 				}
 			}
 		}

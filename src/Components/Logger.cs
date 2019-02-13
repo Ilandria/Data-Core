@@ -29,15 +29,19 @@ namespace CCB
 					switch (logLevel.Value)
 					{
 						case LogLevel.Message:
-							ConsoleUtils.Message(GetFormattedMessage());
+							ConsoleUtils.Msg(GetFormattedMessage());
 							break;
 
 						case LogLevel.Warning:
-							ConsoleUtils.Warning(GetFormattedMessage());
+							ConsoleUtils.Wrn(GetFormattedMessage());
 							break;
 
 						case LogLevel.Error:
-							ConsoleUtils.Error(GetFormattedMessage());
+							ConsoleUtils.Err(GetFormattedMessage());
+							break;
+
+						case LogLevel.Debug:
+							ConsoleUtils.Dbg(GetFormattedMessage());
 							break;
 					}
 				}

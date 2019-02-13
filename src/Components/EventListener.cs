@@ -11,13 +11,14 @@ namespace CCB
 			public class EventListener : MonoBehaviour
 			{
 				[SerializeField]
-				private EventRegistryVariable[] autoRegister = null;
+				private EventRegistryVariable[] autoRegister;
 
 				[SerializeField]
 				private EventVariableReference response;
 
 				public EventListener()
 				{
+					autoRegister = new EventRegistryVariable[0];
 					response = new EventVariableReference(this);
 				}
 
@@ -26,25 +27,19 @@ namespace CCB
 					response.Value.Invoke();
 				}
 
-				private void Awake()
+				private void OnEnable()
 				{
-					if (autoRegister != null)
+					foreach (EventRegistryVariable eventRegistry in autoRegister)
 					{
-						foreach (EventRegistryVariable eventRegistry in autoRegister)
-						{
-							eventRegistry.Value.Register(this);
-						}
+						eventRegistry.Value.Register(this);
 					}
 				}
 
-				private void OnDestroy()
+				private void OnDisable()
 				{
-					if (autoRegister != null)
+					foreach (EventRegistryVariable eventRegistry in autoRegister)
 					{
-						foreach (EventRegistryVariable eventRegistry in autoRegister)
-						{
-							eventRegistry.Value.Unregister(this);
-						}
+						eventRegistry.Value.Unregister(this);
 					}
 				}
 			}

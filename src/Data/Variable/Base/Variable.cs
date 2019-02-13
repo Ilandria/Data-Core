@@ -32,9 +32,14 @@ namespace CCB
 					{
 						get
 						{
+							if (logOnRead)
+							{
+								ConsoleUtils.Msg($"Got {value.ToString()} from {name}.");
+							}
+
 							if (value == null)
 							{
-								ConsoleUtils.Warning($"Variable {name} value is currently null.");
+								ConsoleUtils.Dbg($"Variable {name} value is currently null.");
 							}
 
 							return value;
@@ -44,12 +49,18 @@ namespace CCB
 						{
 							if (accessMode == PermissionLevel.ReadWrite)
 							{
+								if (logOnWrite)
+								{
+									ConsoleUtils.Msg($"Set {name} to {value.ToString()}, was {this.value.ToString()}");
+								}
+
 								this.value = value;
+
 								onValueChanged.Invoke();
 							}
 							else
 							{
-								ConsoleUtils.Warning($"Tried to set {name}'s value while it was in read-only mode.");
+								ConsoleUtils.Dbg($"Tried to set {name}'s value while it was in read-only mode.");
 							}
 						}
 					}
@@ -64,9 +75,9 @@ namespace CCB
 					/// </summary>
 					public override void Reset()
 					{
-						if (value != null)
+						if (Value != null)
 						{
-							if (!value.Equals(defaultValue))
+							if (!Value.Equals(defaultValue))
 							{
 								onValueChanged.Invoke();
 							}
@@ -81,7 +92,7 @@ namespace CCB
 					/// </summary>
 					protected override void SetToDefault()
 					{
-						value = defaultValue;
+						Value = defaultValue;
 					}
 				}
 			}

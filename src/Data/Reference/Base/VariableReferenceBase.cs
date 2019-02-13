@@ -62,7 +62,7 @@ namespace CCB
 					{
 						if (owner == null)
 						{
-							ConsoleUtils.Error($"{GetType()} was not assigned an owner. This is could make debugging a pain!");
+							ConsoleUtils.Err($"{GetType()} was not assigned an owner. This is could make debugging a pain!");
 						}
 						else
 						{

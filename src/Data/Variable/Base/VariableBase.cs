@@ -38,6 +38,18 @@ namespace CCB
 					protected UnityEngine.Events.UnityEvent onValueChanged = null;
 
 					/// <summary>
+					/// If reading this value should output a log message.
+					/// </summary>
+					[SerializeField]
+					protected bool logOnRead = false;
+
+					/// <summary>
+					/// If reading this value should output a log message.
+					/// </summary>
+					[SerializeField]
+					protected bool logOnWrite = false;
+
+					/// <summary>
 					/// If it is currently safe to write to this variable.
 					/// </summary>
 					public bool IsReadOnly

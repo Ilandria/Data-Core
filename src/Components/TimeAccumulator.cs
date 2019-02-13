@@ -14,15 +14,11 @@ namespace CCB
 				private BoolVariableReference isRunning;
 
 				[SerializeField]
-				private FloatVariableReference timeRatio;
-
-				[SerializeField]
 				private FloatVariableReference output;
 
 				public TimeAccumulator()
 				{
 					isRunning = new BoolVariableReference(this);
-					timeRatio = new FloatVariableReference(this);
 					output = new FloatVariableReference(this);
 				}
 
@@ -30,7 +26,7 @@ namespace CCB
 				{
 					if (isRunning.Value)
 					{
-						output.Value += timeRatio.Value * Time.deltaTime;
+						output.Value += Time.deltaTime;
 					}
 				}
 			}

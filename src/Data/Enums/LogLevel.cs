@@ -9,6 +9,7 @@
 				public enum LogLevel
 				{
 					Message,
+					Debug,
 					Warning,
 					Error
 				}
