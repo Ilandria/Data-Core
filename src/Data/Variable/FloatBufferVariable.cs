@@ -25,7 +25,7 @@ namespace CCB
 					/// <summary>
 					/// Copies the default max size into the current max size and clears the buffer.
 					/// </summary>
-					protected override void SetToDefault()
+					public override void Reset()
 					{
 						value = new FloatBuffer(defaultValue.MaxBufferSize);
 					}

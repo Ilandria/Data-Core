@@ -15,12 +15,12 @@ namespace CCB
 				{
 					public void Raise()
 					{
-						Value.Raise();
+						Value?.Raise();
 					}
 
-					protected override void SetToDefault()
+					public override void Reset()
 					{
-						Value.Clear();
+						Value?.Clear();
 					}
 				}
 			}

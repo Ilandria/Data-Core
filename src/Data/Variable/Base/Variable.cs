@@ -34,12 +34,12 @@ namespace CCB
 						{
 							if (logOnRead)
 							{
-								ConsoleUtils.Msg($"Got {value.ToString()} from {name}.");
+								ConsoleUtils.Dbg($"Got {value.ToString()} from {name}.");
 							}
 
 							if (value == null)
 							{
-								ConsoleUtils.Dbg($"Variable {name} value is currently null.");
+								ConsoleUtils.Wrn($"Variable {name} value is currently null.");
 							}
 
 							return value;
@@ -49,18 +49,20 @@ namespace CCB
 						{
 							if (accessMode == PermissionLevel.ReadWrite)
 							{
-								if (logOnWrite)
+								if (!this.value.Equals(value))
 								{
-									ConsoleUtils.Msg($"Set {name} to {value.ToString()}, was {this.value.ToString()}");
+									if (logOnWrite)
+									{
+										ConsoleUtils.Dbg($"Set {name} to {value.ToString()}, was {this.value.ToString()}");
+									}
+
+									this.value = value;
+									onValueChanged?.Invoke();
 								}
-
-								this.value = value;
-
-								onValueChanged.Invoke();
 							}
 							else
 							{
-								ConsoleUtils.Dbg($"Tried to set {name}'s value while it was in read-only mode.");
+								ConsoleUtils.Wrn($"Tried to set {name}'s value while it was in read-only mode.");
 							}
 						}
 					}
@@ -71,28 +73,16 @@ namespace CCB
 					}
 
 					/// <summary>
-					/// Call to reset the value to the default value. If the value is changed, the onChanged event is raised.
+					/// Call to reset the value to the default value.
 					/// </summary>
 					public override void Reset()
 					{
-						if (Value != null)
-						{
-							if (!Value.Equals(defaultValue))
-							{
-								onValueChanged.Invoke();
-							}
-						}
-
-						SetToDefault();
+						Value = defaultValue;
 					}
 
-					/// <summary>
-					/// Internally called by ResetIfChanged. Override to define custom reset behaviour to support
-					/// things like deep copying data, or alter other properties.
-					/// </summary>
-					protected override void SetToDefault()
+					public override string ToString()
 					{
-						Value = defaultValue;
+						return Value?.ToString();
 					}
 				}
 			}

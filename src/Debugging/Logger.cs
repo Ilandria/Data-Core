@@ -10,24 +10,32 @@ namespace CCB
 		{
 			public static class ConsoleUtils
 			{
-				public static void Msg(string info, [CallerMemberName] string memberName = "", [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string filePath = "")
-				{
-					Debug.Log(GetFormattedMessage(memberName, lineNumber, filePath, info, "Info"));
-				}
-
 				public static void Dbg(string info, [CallerMemberName] string memberName = "", [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string filePath = "")
 				{
+#if LOGDBG
 					Debug.Log(GetFormattedMessage(memberName, lineNumber, filePath, info, "Debug"));
+#endif
+				}
+
+				public static void Msg(string info, [CallerMemberName] string memberName = "", [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string filePath = "")
+				{
+#if LOGMSG
+					Debug.Log(GetFormattedMessage(memberName, lineNumber, filePath, info, "Info"));
+#endif
 				}
 
 				public static void Wrn(string info, [CallerMemberName] string memberName = "", [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string filePath = "")
 				{
+#if LOGMSG || LOGWRN
 					Debug.LogWarning(GetFormattedMessage(memberName, lineNumber, filePath, info, "Warning"));
+#endif
 				}
 
 				public static void Err(string info, [CallerMemberName] string memberName = "", [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string filePath = "")
 				{
+#if LOGMSG || LOGWRN || LOGERR
 					Debug.LogError(GetFormattedMessage(memberName, lineNumber, filePath, info, "Error"));
+#endif
 				}
 
 				public static void UnassignedReferenceWarning(Object owner, string ownerFieldName)

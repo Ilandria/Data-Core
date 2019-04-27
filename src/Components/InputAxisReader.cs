@@ -51,7 +51,7 @@ namespace CCB
 							// ...and now it is, raise the "on" event.
 							if (!Mathf.Approximately(currentAxis, 0.0f))
 							{
-								onEvent.Value.Raise();
+								onEvent.Value?.Raise();
 							}
 						}
 						// If it was being activated...
@@ -60,12 +60,12 @@ namespace CCB
 							// ...and now it isn't, raise the "off" event.
 							if (Mathf.Approximately(currentAxis, 0.0f))
 							{
-								offEvent.Value.Raise();
+								offEvent.Value?.Raise();
 							}
 							// ...and it still is, raise the "hold" event.
 							else
 							{
-								holdEvent.Value.Raise();
+								holdEvent.Value?.Raise();
 							}
 						}
 					}

@@ -13,7 +13,13 @@ namespace CCB
 				[CreateAssetMenu(menuName = "CCB/Variable/Float")]
 				public class FloatVariable : Variable<float>
 				{
-
+					public void SetValue(TMPro.TMP_InputField input)
+					{
+						if (float.TryParse(input.text, out float result))
+						{
+							Value = result;
+						}
+					}
 				}
 			}
 

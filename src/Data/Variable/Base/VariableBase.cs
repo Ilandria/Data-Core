@@ -66,12 +66,6 @@ namespace CCB
 					public abstract void Reset();
 
 					/// <summary>
-					/// Internally called by ResetIfChanged. Override to define custom reset behaviour to support
-					/// things like deep copying data, or alter other properties.
-					/// </summary>
-					protected abstract void SetToDefault();
-
-					/// <summary>
 					/// Get the currently stored value as the given type.
 					/// </summary>
 					public abstract T GetValueAs<T>();
@@ -91,12 +85,12 @@ namespace CCB
 #if UNITY_EDITOR
 						if (autoResetInEditor)
 						{
-							SetToDefault();
+							Reset();
 						}
 #else
 						if (autoResetInBuild)
 						{
-							SetToDefault();
+							Reset();
 						}
 #endif
 					}

@@ -62,6 +62,11 @@ namespace CCB
 				{
 					registeredListeners.Clear();
 				}
+
+				public override string ToString()
+				{
+					return $"event with {registeredListeners.Count} registered listener(s)";
+				}
 			}
 		}
 	}
